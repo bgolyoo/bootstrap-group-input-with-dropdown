@@ -1,0 +1,12 @@
+<pre>{{value}}</pre>
+
+<div id="group-input" class="btn-group">
+  <input type="text" class="form-control" [(ngModel)]="value" placeholder="Type to search...">
+  <button class="btn btn-primary dropdown-toggle dropdown-toggle-split"></button>
+</div>
+<app-dropdown
+  [options]="options"
+  [inputId]="'group-input'"
+  [search]="value"
+  (selected)="setValue($event)"
+></app-dropdown>

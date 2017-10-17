@@ -1,0 +1,9 @@
+#Dropdown {
+    .dropdown-item {
+         cursor: pointer;
+
+         &.selected {
+             background-color: #298dff;
+         }
+    }
+}

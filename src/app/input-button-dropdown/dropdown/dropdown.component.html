@@ -1,0 +1,25 @@
+<section
+  id="Dropdown"
+  appDropdown
+  [inputId]="inputId"
+  (clickedOutside)="onClickOutside()"
+  (clickedInInput)="onClickInInput()"
+  (enter)="onEnterTyped()"
+  (escape)="onEscapeTyped()"
+  (tab)="onTabTyped()"
+  (moveUp)="onMoveUp()"
+  (moveDown)="onMoveDown()"
+  class="dropdown"
+>
+<ul class="dropdown-menu" [class.show]="isOpen">
+    <li
+      class="dropdown-item"
+      *ngFor="let option of options | dropdownFilter: search; let i = index"
+      [ngClass]="{'option': true, 'selected': i === selectedItem}"
+      (mouseenter)="onMouseEnter(i)"
+      (click)="onSelect(option)"
+    >
+      <span>{{option.value}}</span>
+    </li>
+</ul>
+</section>
