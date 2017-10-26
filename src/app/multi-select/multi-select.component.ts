@@ -166,6 +166,9 @@ export class MultiSelectComponent implements OnInit, OnChanges, ControlValueAcce
       if (this.singleSelected) {
         this.optionsChanged.emit(this.singleSelected.id);
         this.propagateChange(this.singleSelected.id);
+      } else {
+        this.optionsChanged.emit(null);
+        this.propagateChange(null);
       }
     }
   }
