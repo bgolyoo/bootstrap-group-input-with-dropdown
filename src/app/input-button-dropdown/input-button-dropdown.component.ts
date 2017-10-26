@@ -16,6 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class InputButtonDropdownComponent implements OnInit, ControlValueAccessor {
 
   @Input() options: Array<{ id: number, value: string }> = [];
+  private isInputInFocus: boolean;
   private _value: string;
   private propagateChange = (_: any) => {};
 
@@ -47,33 +48,26 @@ export class InputButtonDropdownComponent implements OnInit, ControlValueAccesso
   }
 
   public setValue(value: { id: number, value: string }): void {
-    console.log('set', value);
     this._value = value.value;
     this.propagateChange(this._value);
   }
 
+  public onClearClick(): void {
+    this.value = '';
+  }
+
+  public onDelTyped(): void {
+    if (this.isInputInFocus) {
+      this.onClearClick();
+    }
+  }
+
+  public onInputFocus(): void {
+    this.isInputInFocus = true;
+  }
+  
+  public onInputBlur(): void {
+    this.isInputInFocus = false;
+  }
+
 }
-
-// import { Component, OnInit, Input, forwardRef } from '@angular/core';
-
-// @Component({
-//   selector: 'app-input-button-dropdown',
-//   templateUrl: './input-button-dropdown.component.html',
-//   styleUrls: ['./input-button-dropdown.component.scss']
-// })
-// export class InputButtonDropdownComponent implements OnInit {
-
-//   @Input() options: Array<{ id: number, value: string }> = [];
-//   private value: string;
-
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-//   public setValue(value: { id: number, value: string }): void {
-//     this.value = value.value;
-//     console.log('set', this.value);
-//   }
-
-// }

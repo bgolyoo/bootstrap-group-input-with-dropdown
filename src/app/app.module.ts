@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { InputButtonDropdownModule } from './input-button-dropdown/input-button-dropdown.module';
+import { MultiSelectModule } from './multi-select/multi-select.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { InputButtonDropdownModule } from './input-button-dropdown/input-button-
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    InputButtonDropdownModule
+    InputButtonDropdownModule,
+    MultiSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

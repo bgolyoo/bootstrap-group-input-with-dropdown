@@ -1,6 +1,22 @@
 <div class="container">
   <form *ngIf="form" [formGroup]="form">
-    <app-input-button-dropdown formControlName="input" [options]="options"></app-input-button-dropdown>
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <app-input-button-dropdown 
+          formControlName="ibd" 
+          [options]="IBDOptions"
+        ></app-input-button-dropdown>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <app-multi-select
+          *ngIf="MSOptions && MSOptions.length"
+          [options]="MSOptions"
+          [multi]="true"
+          [placeholder]="'Select option'"
+          formControlName="ms"
+        ></app-multi-select>
+      </div>
+    </div>
   </form>
+  <pre>{{form.value | json}}</pre>
 </div>
-<pre>{{form.value | json}}</pre>

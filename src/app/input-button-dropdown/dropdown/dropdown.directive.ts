@@ -1,7 +1,7 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 export enum EKeyboardCode {
-  ArrowDown = 40, Escape = 27, ArrowUp = 38, Enter = 13, Tab = 9
+  ArrowDown = 40, Escape = 27, ArrowUp = 38, Enter = 13, Tab = 9, Delete = 46
 }
 
 @Directive({
@@ -10,6 +10,7 @@ export enum EKeyboardCode {
 export class DropdownDirective {
 
   @Input() inputId: string;
+  @Input() clearButtonId: string;
   @Output() clickedOutside: EventEmitter<any> = new EventEmitter();
   @Output() clickedInInput: EventEmitter<any> = new EventEmitter();
   @Output() moveDown: EventEmitter<any> = new EventEmitter();
@@ -17,14 +18,15 @@ export class DropdownDirective {
   @Output() escape: EventEmitter<any> = new EventEmitter();
   @Output() enter: EventEmitter<any> = new EventEmitter();
   @Output() tab: EventEmitter<any> = new EventEmitter();
+  @Output() del: EventEmitter<any> = new EventEmitter();
 
-  constructor(private el: ElementRef) {
-  }
+  constructor(private el: ElementRef) { }
 
   @HostListener('document:mousedown', ['$event.target'])
   public onMouseDown(targetElement) {
     const input = document.getElementById(this.inputId);
-    if (input && input.contains(targetElement)) {
+    const clearButton = document.getElementById(this.clearButtonId);
+    if (input && input.contains(targetElement) && (!clearButton || (clearButton && !clearButton.contains(targetElement)))) {
       this.clickedInInput.emit();
     }
     if (!this.el.nativeElement.contains(targetElement) && input && !input.contains(targetElement)) {
@@ -44,6 +46,8 @@ export class DropdownDirective {
       this.escape.emit();
     } else if (event.keyCode === EKeyboardCode.Tab) {
       this.tab.emit();
+    } else if (event.keyCode === EKeyboardCode.Delete) {
+      this.del.emit();
     }
   }
 
